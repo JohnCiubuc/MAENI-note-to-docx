@@ -22,6 +22,7 @@ class Ui(QtWidgets.QMainWindow):
     def buttonClicked(self):
         text = self.plainTextEdit.toPlainText().split('\n')
         maeni_note_export.exportStudentNotes(text)
+        self.plainTextEdit.setPlainText("Notes Exported")
  
         
 app = QtWidgets.QApplication(sys.argv) 
