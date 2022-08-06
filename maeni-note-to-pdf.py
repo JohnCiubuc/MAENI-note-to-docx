@@ -5,7 +5,7 @@ Created on Fri Aug  5 21:06:31 2022
 
 @author: John Ciubuc
 """
-
+import math
 import json
 from docx import Document 
 note = []
@@ -24,8 +24,8 @@ with open("../MAENI-dumps/student_note_content_202208052105.json", 'r') as f:
     jump = json.load(f)
     
 note_db = jump['student_note_content']
-note_ids = [329]
-# note_ids = [329,359,389]
+# note_ids = [329]
+note_ids = [329,359,389]
 
 for id in note_ids:
     note =  [x for x in note_db if x['student_note_id'] ==id] 
@@ -75,11 +75,16 @@ Patient's data is remarkable for {noteSection(38,15)}"""
 
     document.add_paragraph(doc)
     
-    # Needs looping later
-    problem_id=1
-    document.add_heading(f'Problem {problem_id}', 3)
-    document.add_heading('Differential DX}', 3)
-    document.add_heading('Diagnostic Plan', 3)
-    document.add_heading('Treatmnet Plan', 3)
+    problem_list =  [x for x in note if x['item'] == 36] 
+    problem_max = max([x['subitem'] for x in problem_list ])
+    for problem_id in range(0,math.ceil(problem_max/4)):
+        document.add_heading(f'Problem {problem_id+1}', 3)
+        document.add_paragraph(noteSection(36,problem_id*4+0))
+        document.add_heading('Differential DX}', 3)
+        document.add_paragraph(noteSection(36,problem_id*4+1))
+        document.add_heading('Diagnostic Plan', 3)
+        document.add_paragraph(noteSection(36,problem_id*4+2))
+        document.add_heading('Treatment Plan', 3)
+        document.add_paragraph(noteSection(36,problem_id*4+3))
     
-    document.save('test.docx')
+    document.save(f'Student Note {id}.docx')
