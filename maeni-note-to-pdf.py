@@ -33,7 +33,6 @@ for id in note_ids:
     # Add a heading of level 0 (Also called Title)
     document = Document()
     document.add_heading(f'Student Note ID: {id}', 0)
-      
     document.add_heading('Chief Complaint', 1)
     document.add_paragraph(noteSection(20))
     document.add_heading('History of Presenting Illness', 1)
