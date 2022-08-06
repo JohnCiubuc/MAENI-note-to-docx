@@ -87,4 +87,4 @@ def exportStudentNotes(note_ids):
                 document.add_heading('Treatment Plan:', 3)
                 document.add_paragraph(noteSection(note,36,problem_id*4+3))
         
-        document.save(f'Student Note {id}.docx')
+        document.save(f'Exports/Student Note {id}.docx')
