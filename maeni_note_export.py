@@ -88,3 +88,4 @@ def exportStudentNotes(note_ids):
                 document.add_paragraph(noteSection(note,36,problem_id*4+3))
         
         document.save(f'Exports/Student Note {id}.docx')
+print('hi from python')
