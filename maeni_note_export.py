@@ -118,4 +118,10 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
     
 if len(sys.argv) > 1:
     exportStudentNotes(sys.argv[1])
+
+f = open('./test.txt', 'w')
+f.write(sys.argv[0])
+f.write(sys.argv[1])
+f.close()
+
 print('exported document')
