@@ -7,6 +7,7 @@ Created on Fri Aug  5 21:06:31 2022
 """
 import math
 import json
+import sys
 from docx import Document 
 from docx.shared import RGBColor
 
@@ -112,4 +113,7 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
             document.add_paragraph(noteSection(problem_list,problem_id*4+3))
     
     document.save(f'Exports/Student Note {id}.docx')
-    print('exported document')
+    
+if len(sys.argv) > 1:
+    exportStudentNotes(sys.argv[1])
+print('exported document')
