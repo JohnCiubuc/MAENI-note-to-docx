@@ -56,7 +56,7 @@ def exportStudentNotes(json_text_string):
     header_para = header.paragraphs[0]
     
     header_para = header_para.add_run("\tDisclaimer: This page might contain protected health information (PHI) that needs to be handled with care in accordance with HIPAA regulations.")
-     
+    header_para.bold = True
     # Adding the centred zoned header
     # header_para.text = 
     font = header_para.font
