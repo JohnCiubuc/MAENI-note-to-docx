@@ -8,23 +8,24 @@ Created on Fri Aug  5 21:06:31 2022
 import math
 import json
 from docx import Document 
+from docx.shared import RGBColor
 
 def noteSection(note,item, subItem = -1):
     item = str(item)
-    # if subtem == -1:   
-        # for items in note['item']:
     if item in note:
         data_item = note[item]   
-        if type(data_item) == str:
-            return data_item.strip()
-        elif type(data_item) == list:
-            return data_item[0]
-        # text = [x['content'] for x in note if x['item'] == item]
-    # else:
-    #     text = [x['content'] for x in note if x['item'] == item and x['subitem'] == subItem]
-    # if len(text) == 0:
-    #     return ''
-    # text = text[0].strip()
+        if subItem <= -1:
+            if type(data_item) == str:
+                return data_item.strip()
+            elif type(data_item) == list:
+                return data_item[0]
+        else:
+            subItem_s = str(subItem)
+            if subItem_s in data_item:
+                return data_item[subItem_s]
+            elif subItem < len(data_item):
+                if type(data_item) == list:
+                    return data_item[subItem]
     return ""
 
 def exportStudentNotes(note_ids):
@@ -42,6 +43,22 @@ def exportStudentNotes(note_ids):
     # new_store = store.po
     # Add a heading of level 0 (Also called Title)
     document = Document()
+    # Choosing the top most section of the page
+    section = document.sections[0]
+     
+    # Selecting the header
+    header = section.header
+     
+    # Selecting the paragraph already present in
+    # the header section
+    header_para = header.paragraphs[0]
+    
+    header_para = header_para.add_run("\tThis document was exported from MAENI and may contain sensitive medical information.")
+     
+    # Adding the centred zoned header
+    # header_para.text = 
+    font = header_para.font
+    font.color.rgb = RGBColor.from_string('8e0000')
     document.add_heading(f'Student Note ID: {id}', 0)
     document.add_heading('Chief Complaint', 1)
     document.add_paragraph(noteSection(note,20))
@@ -84,18 +101,16 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
 
     document.add_paragraph(doc)
     
-    # problem_list =  [x for x in note if x['item'] == 36] 
-    # if len([x['subitem'] for x in problem_list ]) > 0:
-    #     problem_max = max([x['subitem'] for x in problem_list ])
-    #     for problem_id in range(0,math.ceil(problem_max/4)):
-    #         document.add_heading(f'Problem {problem_id+1}:', 3)
-    #         document.add_paragraph(noteSection(note,36,problem_id*4+0))
-    #         document.add_heading('Differential DX:', 3)
-    #         document.add_paragraph(noteSection(note,36,problem_id*4+1))
-    #         document.add_heading('Diagnostic Plan:', 3)
-    #         document.add_paragraph(noteSection(note,36,problem_id*4+2))
-    #         document.add_heading('Treatment Plan:', 3)
-    #         document.add_paragraph(noteSection(note,36,problem_id*4+3))
+    problem_list =  note['36'] 
+    for problem_id in range(0,math.ceil(len(problem_list)/4)):
+            document.add_heading(f'Problem {problem_id+1}:', 3)
+            document.add_paragraph(noteSection(problem_list,problem_id*4+0))
+            document.add_heading('Differential DX:', 3)
+            document.add_paragraph(noteSection(problem_list,problem_id*4+1))
+            document.add_heading('Diagnostic Plan:', 3)
+            document.add_paragraph(noteSection(problem_list,problem_id*4+2))
+            document.add_heading('Treatment Plan:', 3)
+            document.add_paragraph(noteSection(problem_list,problem_id*4+3))
     
     document.save(f'Exports/Student Note {id}.docx')
 exportStudentNotes(1)
