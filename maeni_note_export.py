@@ -114,7 +114,7 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
             document.add_heading('Treatment Plan:', 3)
             document.add_paragraph(noteSection(problem_list,problem_id*4+3))
     
-    document.save(f'Exports/Student Note {id}.docx')
+    document.save(f'./Student Note {id}.docx')
     
 if len(sys.argv) > 1:
     exportStudentNotes(sys.argv[1])
