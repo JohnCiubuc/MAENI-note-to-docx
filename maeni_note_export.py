@@ -114,16 +114,16 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
             document.add_heading('Treatment Plan:', 3)
             document.add_paragraph(noteSection(problem_list,problem_id*4+3))
     
-    document.save(f'./Student Note {id}.docx')
+    document.save(f'.exports/Student Note {id}.docx')
     
-f = open('./test.txt', 'w')
-f.write(sys.argv[0])
-f.write("try arg")
-f.write(sys.argv[1])
+# f = open('./test.txt', 'w')
+# f.write(sys.argv[0])
+# f.write("try arg")
+# f.write(sys.argv[1])
 
 if len(sys.argv) > 1:
     exportStudentNotes(sys.argv[1])
-f.write('wrote document')
-f.close()
+# f.write('wrote document')
+# f.close()
 
 print('exported document')
