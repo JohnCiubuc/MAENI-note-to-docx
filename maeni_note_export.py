@@ -8,6 +8,7 @@ Created on Fri Aug  5 21:06:31 2022
 import math
 import json
 import sys
+import base64
 from docx import Document 
 from docx.shared import RGBColor
 
@@ -30,6 +31,7 @@ def noteSection(note,item, subItem = -1):
     return ""
 
 def exportStudentNotes(json_text_string):
+    json_text_string = base64.b64decode(json_text_string)
     jump = json.loads(json_text_string)
     note_db = jump['content']
     id = 0
