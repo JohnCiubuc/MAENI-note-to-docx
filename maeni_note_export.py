@@ -55,7 +55,7 @@ def exportStudentNotes(json_text_string):
     # the header section
     header_para = header.paragraphs[0]
     
-    header_para = header_para.add_run("\tThis document was exported from MAENI and may contain sensitive medical information.")
+    header_para = header_para.add_run("\tDisclaimer: This page might contain protected health information (PHI) that needs to be handled with care in accordance with HIPAA regulations.")
      
     # Adding the centred zoned header
     # header_para.text = 
@@ -114,7 +114,7 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
             document.add_heading('Treatment Plan:', 3)
             document.add_paragraph(noteSection(problem_list,problem_id*4+3))
     
-    document.save(f'.exports/Student Note {id}.docx')
+    document.save(f'exports/Student Note {id}.docx')
     
 # f = open('./test.txt', 'w')
 # f.write(sys.argv[0])
