@@ -31,6 +31,10 @@ def noteSection(note,item, subItem = -1):
     return ""
 
 def exportStudentNotes(json_text_string, id):
+    with open('log.log', 'w') as f:
+        f.write(f'ID: {f}\n')
+        f.write(f'exports/Student Note {id}.docx')
+        f.close()
     json_text_string = base64.b64decode(json_text_string)
     jump = json.loads(json_text_string)
     note_db = jump['content']
