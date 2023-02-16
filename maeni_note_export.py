@@ -124,7 +124,7 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
 # f.write("try arg")
 # f.write(sys.argv[1])
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 1:
     exportStudentNotes(sys.argv[1], sys.argv[2])
 # f.write('wrote document')
 # f.close()
