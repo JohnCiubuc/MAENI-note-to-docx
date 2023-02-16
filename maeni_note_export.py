@@ -30,11 +30,10 @@ def noteSection(note,item, subItem = -1):
                     return data_item[subItem]
     return ""
 
-def exportStudentNotes(json_text_string):
+def exportStudentNotes(json_text_string, id):
     json_text_string = base64.b64decode(json_text_string)
     jump = json.loads(json_text_string)
     note_db = jump['content']
-    id = 0
     store = ''
     for i,idic in enumerate(note_db):
         if i != 0:
@@ -121,8 +120,8 @@ Patient's data is remarkable for {noteSection(note,38,15)}"""
 # f.write("try arg")
 # f.write(sys.argv[1])
 
-if len(sys.argv) > 1:
-    exportStudentNotes(sys.argv[1])
+if len(sys.argv) > 2:
+    exportStudentNotes(sys.argv[1], sys.argv[2])
 # f.write('wrote document')
 # f.close()
 
